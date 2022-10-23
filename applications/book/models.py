@@ -23,7 +23,12 @@ class Book(models.Model):
     """Model definition for Book."""
 
     title = models.CharField(max_length=200)
-    category = models.ManyToManyField(Category)
+    category = models.ForeignKey(
+        Category, 
+        null=True,
+        blank=True,
+        related_name="books",
+        on_delete=models.CASCADE)
     author = models.ManyToManyField(Author)
     release_date = models.DateField(auto_now=False, auto_now_add=False)
     cover = models.ImageField(upload_to="cover")
